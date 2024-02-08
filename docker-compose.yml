@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  jadzia-flask-app:
+    image: iceguy/jadzia-flask:alpha_v03g
+    ports:
+      - "5000:5000"
+    volumes:
+      - jadzia-flask-storage:/app/uploads
+    environment:
+      FLASK_APP: Jadzia.py
+      FLASK_RUN_HOST: 0.0.0.0
+
+  celeryworker:
+    image: iceguy/jadzia-celery:alpha_v03g
+    volumes:
+      - jadzia-flask-storage:/app/uploads
+    depends_on:
+      - jadzia-flask-app
+      - redis
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+volumes:
+  jadzia-flask-storage:
