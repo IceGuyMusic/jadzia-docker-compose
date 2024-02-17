@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   jadzia-flask-app:
-    image: iceguy/jadzia-flask:alpha_v03g
+    image: iceguy/jadzia-flask:alpha_v04
     ports:
       - "5000:5000"
     volumes:
@@ -11,7 +11,7 @@ services:
       FLASK_RUN_HOST: 0.0.0.0
 
   celeryworker:
-    image: iceguy/jadzia-celery:alpha_v03g
+    image: iceguy/jadzia-celery:alpha_v04
     volumes:
       - jadzia-flask-storage:/app/uploads
     depends_on:
